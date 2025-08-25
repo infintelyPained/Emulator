@@ -1,0 +1,16 @@
+{
+  "name": "EmulatorJS Codespaces",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
+  },
+  "forwardPorts": [3000, 8080],
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "ritwickdey.LiveServer"
+      ]
+    }
+  }
+}
