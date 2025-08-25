@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EmulatorJS Multi-System Netplay Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #222; color: #eee; }
+    #controls button, #controls input, #systemSelect, #romInput { margin: 4px; }
+    #emulator-container { margin-bottom: 16px; min-height: 260px;}
+    #cheats-ui, #chat-ui, #netplay-ui, #remap-ui {
+      background: #333; padding: 10px; margin-top: 10px; border-radius: 8px;
+    }
+    #chatMessages { max-height: 120px; overflow-y: auto; }
+    #remap-ui input { width: 80px; }
+    #romDrop { border: 2px dashed #aaa; padding: 10px; margin: 10px 0; text-align: center; cursor: pointer; }
+    #romDrop.dragover { background: #444; }
+  </style>
+</head>
+<body>
+  <div>
+    <select id="systemSelect">
+      <optgroup label="Nintendo">
+        <option value="gba">Game Boy Advance</option>
+        <option value="gb">Game Boy</option>
+        <option value="nes">Famicom / NES</option>
+        <option value="vb">Virtual Boy</option>
+        <option value="snes">SNES</option>
+        <option value="nds">DS</option>
+        <option value="n64">Nintendo 64</option>
+      </optgroup>
+      <optgroup label="Sega">
+        <option value="sms">Master System</option>
+        <option value="genesis">Mega Drive / Genesis</option>
+        <option value="gg">Game Gear</option>
+        <option value="saturn">Saturn</option>
+        <option value="sega32x">32X</option>
+        <option value="segacd">CD</option>
+      </optgroup>
+      <optgroup label="Atari">
+        <option value="atari2600">2600</option>
+        <option value="atari5200">5200</option>
+        <option value="atari7800">7800</option>
+        <option value="lynx">Lynx</option>
+        <option value="jaguar">Jaguar</option>
+      </optgroup>
+      <optgroup label="Commodore">
+        <option value="c64">Commodore 64</option>
+        <option value="c128">Commodore 128</option>
+        <option value="amiga">Commodore Amiga</option>
+        <option value="pet">Commodore PET</option>
+        <option value="plus4">Commodore Plus/4</option>
+        <option value="vic20">Commodore VIC-20</option>
+      </optgroup>
+      <optgroup label="Other">
+        <option value="psx">PlayStation</option>
+        <option value="psp">PlayStation Portable</option>
+        <option value="arcade">Arcade</option>
+        <option value="3do">3DO</option>
+        <option value="mame2003">MAME 2003</option>
+        <option value="coleco">ColecoVision</option>
+      </optgroup>
+    </select>
+    <input type="file" id="romInput" accept=".gba,.gb,.nes,.vb,.sfc,.smc,.nds,.n64,.sms,.gen,.gg,.cue,.bin,.iso,.a26,.a52,.a78,.lnx,.jag,.d64,.c64,.c128,.adf,.dsk,.prg,.tap,.pet,.plus4,.vic20,.chd,.cue,.iso,.zip,.7z,.img">
+    <div id="romDrop">Drop ROM here or select above</div>
+  </div>
+
+  <div id="emulator-container"></div>
+  <div id="controls">
+    <button id="fullscreenBtn">Fullscreen</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5">
+    <button id="saveStateBtn">Save State</button>
+    <button id="loadStateBtn">Load State</button>
+    <button id="downloadStateBtn">Download State</button>
+    <input type="file" id="uploadStateInput" style="display:none;" accept=".sav">
+    <button id="uploadStateBtn">Upload State</button>
+    <button id="remapBtn">Remap Controls</button>
+    <button id="netplayBtn">Netplay</button>
+  </div>
+
+  <div id="remap-ui" style="display:none;">
+    <h3>Remap Controls</h3>
+    <form id="remapForm"></form>
+    <button id="closeRemap">Close</button>
+  </div>
+
+  <div id="netplay-ui" style="display:none;">
+    <input type="text" id="roomName" placeholder="Room Name">
+    <button id="startNetplay">Start Netplay</button>
+    <button id="inviteBtn">Generate Invite Link</button>
+    <div id="inviteLink"></div>
+    <div id="netplayStatus"></div>
+    <ul id="chatMessages"></ul>
+    <input type="text" id="chatInput" placeholder="Type message...">
+    <button id="sendChat">Send</button>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/emulatorjs"></script>
+  <script src="main.js"></script>
+</body>
+</html>
